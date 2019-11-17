@@ -3,6 +3,7 @@ package gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -63,7 +64,7 @@ public class ClienteFormController {
 	
 	@FXML
 	public void onBtSair() {
-		System.out.println("Saindo do Programa");
+		Main.chageScreen("main");
 	}
 	
 }

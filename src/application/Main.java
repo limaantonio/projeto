@@ -14,7 +14,7 @@ public class Main extends Application {
 	
 	private static Scene mainScene;
 	private static Scene clientScene;
-
+	private static Scene associacoScene;
 	
 	@Override
 	public void start(Stage primarystage) {
@@ -25,6 +25,9 @@ public class Main extends Application {
 			
 			Parent parentCliente = FXMLLoader.load(getClass().getResource("/gui/cliente.fxml"));
 			clientScene = new Scene(parentCliente);
+			
+			Parent parentAssociacao = FXMLLoader.load(getClass().getResource("/gui/Associacao.fxml"));
+			associacoScene = new Scene(parentAssociacao);
 			
 			
 			
@@ -42,6 +45,10 @@ public class Main extends Application {
 
 		case "cliente":
 			stage.setScene(clientScene);
+			break;
+		
+		case "associacao":
+			stage.setScene(associacoScene);
 			break;
 		}
 	}

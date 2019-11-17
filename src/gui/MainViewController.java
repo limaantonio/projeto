@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -20,10 +21,25 @@ public class MainViewController implements Initializable{
 	private MenuItem menuItemCliente;
 	
 	@FXML
+	private MenuItem menuItemAssociacao;
+	
+	@FXML
+	private Menu menuHome;
+	
+	@FXML
 	public void onMenuItemClienteSelect() {
 		Main.chageScreen("cliente");
 	}
 	
+	@FXML
+	public void onMenuItemAssociacaoSelect() {
+		Main.chageScreen("associacao");
+	}
+	
+	@FXML
+	public void onMenuHomeSelect() {
+		Main.chageScreen("main");
+	}
 
 	
 
