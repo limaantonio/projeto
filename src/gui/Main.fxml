@@ -13,14 +13,14 @@
         <Menu mnemonicParsing="false" onAction="#onMenuHomeSelect" onMenuValidation="#onMenuHomeSelect" text="Home" fx:id="menuHome" />
         <Menu mnemonicParsing="false" text="Consumo">
           <items>
-            <MenuItem mnemonicParsing="false" text="Novo" />
+            <MenuItem mnemonicParsing="false" onAction="#onMenuItemConsumoSelect" text="Novo" fx:id="menuConsumo" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Cadastros">
           <items>
             <MenuItem mnemonicParsing="false" onAction="#onMenuItemClienteSelect" text="Cliente" fx:id="menuItemCliente" />
             <MenuItem mnemonicParsing="false" onAction="#onMenuItemAssociacaoSelect" text="Associaçao" fx:id="menuItemAssociacao" />
-            <MenuItem mnemonicParsing="false" text="Responsavel" />
+            <MenuItem mnemonicParsing="false" onAction="#onMenuItemResponsavelSelect" text="Responsavel" fx:id="menuItemResponsavel" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Ordens">

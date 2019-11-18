@@ -18,13 +18,29 @@ import javafx.stage.Stage;
 public class MainViewController implements Initializable{
 	
 	@FXML
+	private MenuItem menuConsumo;
+	
+	@FXML
+	private Menu menuHome;
+	
+	@FXML
 	private MenuItem menuItemCliente;
 	
 	@FXML
 	private MenuItem menuItemAssociacao;
 	
 	@FXML
-	private Menu menuHome;
+	private MenuItem menuItemResponsavel;
+	
+	@FXML
+	public void onMenuHomeSelect() {
+		Main.chageScreen("main");
+	}
+	
+	@FXML
+	public void onMenuItemConsumoSelect() {
+		Main.chageScreen("consumo");
+	}
 	
 	@FXML
 	public void onMenuItemClienteSelect() {
@@ -37,14 +53,12 @@ public class MainViewController implements Initializable{
 	}
 	
 	@FXML
-	public void onMenuHomeSelect() {
-		Main.chageScreen("main");
+	public void onMenuItemResponsavelSelect() {
+		Main.chageScreen("responsavel");
 	}
-
 	
-
-
-
+	
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub

@@ -15,19 +15,27 @@ public class Main extends Application {
 	private static Scene mainScene;
 	private static Scene clientScene;
 	private static Scene associacoScene;
+	private static Scene responsavelScene;
+	private static Scene consumoScene;
 	
 	@Override
 	public void start(Stage primarystage) {
 		stage = primarystage;
 		try {
-			Parent parent = FXMLLoader.load(getClass().getResource("/gui/main.fxml"));
+			Parent parent = FXMLLoader.load(getClass().getResource("/gui/Main.fxml"));
 			mainScene = new Scene(parent);
 			
-			Parent parentCliente = FXMLLoader.load(getClass().getResource("/gui/cliente.fxml"));
+			Parent parentCliente = FXMLLoader.load(getClass().getResource("/gui/Cliente.fxml"));
 			clientScene = new Scene(parentCliente);
 			
 			Parent parentAssociacao = FXMLLoader.load(getClass().getResource("/gui/Associacao.fxml"));
 			associacoScene = new Scene(parentAssociacao);
+			
+			Parent parentResponsavel = FXMLLoader.load(getClass().getResource("/gui/Responsavel.fxml"));
+			responsavelScene = new Scene(parentResponsavel);
+			
+			Parent parentConsumo = FXMLLoader.load(getClass().getResource("/gui/Consumo.fxml"));
+			consumoScene = new Scene(parentConsumo);
 			
 			
 			
@@ -49,6 +57,14 @@ public class Main extends Application {
 		
 		case "associacao":
 			stage.setScene(associacoScene);
+			break;
+		
+		case "responsavel":
+			stage.setScene(responsavelScene);
+			break;
+			
+		case "consumo":
+			stage.setScene(consumoScene);
 			break;
 		}
 	}

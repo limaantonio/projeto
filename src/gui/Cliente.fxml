@@ -8,40 +8,6 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="gui.ClienteFormController">
   <children>
-    <MenuBar layoutX="0.0" layoutY="1.0" prefHeight="27.0" prefWidth="600.0">
-      <menus>
-        <Menu mnemonicParsing="false" text="Home" />
-        <Menu mnemonicParsing="false" text="Consumo">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Novo" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Cadastros">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Cliente" />
-            <MenuItem mnemonicParsing="false" text="Associaçao" />
-            <MenuItem mnemonicParsing="false" text="Responsavel" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Ordens">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Ordem de serviço" />
-            <MenuItem mnemonicParsing="false" text="Ordem de compra" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Relatorios">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Por cliente" />
-            <MenuItem mnemonicParsing="false" text="Por associaçao" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Configuraçoes">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Tarifa" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
     <GridPane layoutY="36.0" prefHeight="164.0" prefWidth="572.0" AnchorPane.rightAnchor="14.0">
       <children>
         <TextField fx:id="textNumCliente" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
