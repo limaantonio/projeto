@@ -28,6 +28,8 @@
         <Label text="CPF:" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="2" />
         <Label text="Telefone:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
         <TextField fx:id="textTelefone" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <TextField id="textTelefone" fx:id="textAssociacao" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Label text="Associaçao:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="339.0" minWidth="10.0" prefWidth="143.0" />

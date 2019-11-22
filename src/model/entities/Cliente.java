@@ -1,7 +1,5 @@
 package model.entities;
 
-import java.util.Date;
-
 public class Cliente {
 	
 	private String numeroCliente;
@@ -10,19 +8,45 @@ public class Cliente {
 	private String cpfCliente;
 	private String telefoneCliente;
 	
+	private Integer id;
+	
+	
+	
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+	
 	public Cliente() {
 		
+	}
+	
+	
+
+
+public Cliente(String numero, String nome) {
+		this.numeroCliente = numero;
+		this.nomeCliente = nome;
 	}
 
 	public Cliente(String numeroCliente, String nomeCliente, String dtNascimentoCliente, String cpfCliente,
 			String telefoneCliente) {
+		
 		this.numeroCliente = numeroCliente;
 		this.nomeCliente = nomeCliente;
 		this.dtNascimentoCliente = dtNascimentoCliente;
 		this.cpfCliente = cpfCliente;
 		this.telefoneCliente = telefoneCliente;
+		
 	}
 
+	
 	public String getNumeroCliente() {
 		return numeroCliente;
 	}

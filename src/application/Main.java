@@ -6,17 +6,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
-
-public class Main extends Application {
+public class Main extends Application{
 	
+
 	private static Stage stage;
-	
 	private static Scene mainScene;
 	private static Scene clientScene;
 	private static Scene associacoScene;
 	private static Scene responsavelScene;
 	private static Scene consumoScene;
+	private static Scene tabelaScene;
 	
 	@Override
 	public void start(Stage primarystage) {
@@ -36,6 +35,9 @@ public class Main extends Application {
 			
 			Parent parentConsumo = FXMLLoader.load(getClass().getResource("/gui/Consumo.fxml"));
 			consumoScene = new Scene(parentConsumo);
+			
+			Parent parentTabelaClientes = FXMLLoader.load(getClass().getResource("/gui/TabelaClientes.fxml"));
+			tabelaScene = new Scene(parentTabelaClientes);
 			
 			
 			
@@ -66,10 +68,18 @@ public class Main extends Application {
 		case "consumo":
 			stage.setScene(consumoScene);
 			break;
+			
+		case "tabela":
+			stage.setScene(tabelaScene);
+			break;
 		}
 	}
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	public static Scene getMainScene() {
+		return mainScene;
 	}
 }

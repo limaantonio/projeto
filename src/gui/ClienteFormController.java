@@ -1,12 +1,10 @@
 package gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import application.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import model.entities.Associacao;
 import model.entities.Cliente;
 
 public class ClienteFormController {
@@ -29,6 +27,9 @@ public class ClienteFormController {
 	private TextField textTelefone;
 	
 	@FXML
+	private TextField textAssociacao;
+	
+	@FXML
 	private Button btCancelar;
 	
 	@FXML
@@ -37,6 +38,8 @@ public class ClienteFormController {
 	@FXML
 	private Button btSair;
 	
+	
+	
 	//Açoes do formulário
 	
 	
@@ -44,17 +47,20 @@ public class ClienteFormController {
 	@FXML
 	public void onBtSalvar() {
 		
+		
 	
-		Cliente cliente = new Cliente(this.textNumCliente.getText(),
-									  this.textNomeCliente.getText(), 
-									  this.textDataNascimento.getText(), 
-									  this.textCPF.getText(),
-									  this.textTelefone.getText());
+//		Cliente cliente = new Cliente(this.textNumCliente.getText(),
+//									  this.textNomeCliente.getText(), 
+//									  this.textDataNascimento.getText(), 
+//									  this.textCPF.getText(),
+//									  this.textTelefone.getText()
+//									  );
+//		
 		
-		
+	
 		
 		System.out.println("Cliente Salvo");
-		System.out.println(cliente);
+		//System.out.println(cliente);
 	}
 	
 	@FXML

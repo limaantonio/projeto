@@ -18,20 +18,19 @@
           </GridPane.margin>
         </Label>
         <TextField id="btCancelar" fx:id="textDataNascimento" prefWidth="200.0" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="1" />
-        <TextField fx:id="textCPF" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <TextField fx:id="textCPF" prefWidth="291.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
           <GridPane.margin>
-            <Insets left="10.0" right="150.0" />
+            <Insets left="10.0" right="5.0" />
           </GridPane.margin>
         </TextField>
         <TextField id="textDataNascimento" fx:id="textEndereco" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3" />
         <Label text="Endereço" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <Label text="CPF:" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="2" />
-        <Label text="Observaçoes:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField id="textTelefone" fx:id="textObservacao" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <Label prefWidth="86.99990844726562" text="Associacao" GridPane.columnIndex="0" GridPane.rowIndex="4" />
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="339.0" minWidth="10.0" prefWidth="143.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="429.0" minWidth="10.0" prefWidth="429.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="339.0" minWidth="10.0" prefWidth="271.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="429.0" minWidth="10.0" prefWidth="301.0" />
       </columnConstraints>
       <rowConstraints>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

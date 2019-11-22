@@ -56,6 +56,6 @@ public class ResponsavelFormController {
 		
 		@FXML
 		public void onBtSair() {
-			Main.chageScreen("main");
+			//Main.chageScreen("main");
 		}
 }

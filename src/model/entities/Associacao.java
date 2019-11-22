@@ -1,39 +1,51 @@
 package model.entities;
 
-public class Associacao {
-	
-	private String nomeAssociacao;
-	private String logrado;
+import java.io.Serializable;
+
+public class Associacao implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
+	private String name;
+	private String endereco;
 	private String distrito;
-	private String qtdFamilias;
-	private String observacao;
+	private String responsavel;
 	
-	public Associacao(){
-		
+	public Associacao() {
 	}
 
-	public Associacao(String nomeAssociacao, String logrado, String distrito, String qtdFamilias, String observacao) {
-		this.nomeAssociacao = nomeAssociacao;
-		this.logrado = logrado;
+	public Associacao(Integer id, String name, String endereco, String distrito, String responsavel) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.endereco = endereco;
 		this.distrito = distrito;
-		this.qtdFamilias = qtdFamilias;
-		this.observacao = observacao;
+		this.responsavel = responsavel;
 	}
 
-	public String getNomeAssociacao() {
-		return nomeAssociacao;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setNomeAssociacao(String nomeAssociacao) {
-		this.nomeAssociacao = nomeAssociacao;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getLogrado() {
-		return logrado;
+	public String getName() {
+		return name;
 	}
 
-	public void setLogrado(String logrado) {
-		this.logrado = logrado;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 	public String getDistrito() {
@@ -44,30 +56,19 @@ public class Associacao {
 		this.distrito = distrito;
 	}
 
-	public String getQtdFamilias() {
-		return qtdFamilias;
+	public String getResponsavel() {
+		return responsavel;
 	}
 
-	public void setQtdFamilias(String qtdFamilias) {
-		this.qtdFamilias = qtdFamilias;
-	}
-
-	public String getObservacao() {
-		return observacao;
-	}
-
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
+	public void setResponsavel(String responsavel) {
+		this.responsavel = responsavel;
 	}
 
 	@Override
 	public String toString() {
-		return "Associacao [nomeAssociacao=" + nomeAssociacao + ", logrado=" + logrado + ", distrito=" + distrito
-				+ ", qtdFamilias=" + qtdFamilias + ", observacao=" + observacao + "]";
+		return "Associacao [id=" + id + ", name=" + name + ", endereco=" + endereco + ", distrito=" + distrito
+				+ ", responsavel=" + responsavel + "]";
 	}
-	
-	
-	
 	
 	
 	

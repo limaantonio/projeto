@@ -10,28 +10,28 @@
   <children>
     <GridPane layoutY="36.0" prefHeight="164.0" prefWidth="572.0" AnchorPane.rightAnchor="14.0">
       <children>
-        <TextField id="textNumCliente" fx:id="textNomeAssociacao" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Label text="Logradoro:" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <TextField id="textNumCliente" fx:id="txtId" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label text="Id:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="Nome:" GridPane.columnIndex="1" GridPane.rowIndex="0">
           <GridPane.margin>
             <Insets left="10.0" fx:id="x1" />
           </GridPane.margin>
         </Label>
-        <TextField id="btCancelar" fx:id="textLogradoro" prefWidth="200.0" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="1" />
-        <TextField id="textCPF" fx:id="textQtdFamilias" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <TextField id="btCancelar" fx:id="txtName" prefWidth="200.0" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="1" />
+        <TextField id="textDataNascimento" fx:id="txtEndereco" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label text="Endereço:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label text="Responsavel:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField id="textTelefone" fx:id="txtResponsavel" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <TextField id="textDataNascimento" fx:id="txtDistrito" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
           <GridPane.margin>
-            <Insets left="10.0" right="150.0" />
+            <Insets left="10.0" fx:id="x1" />
           </GridPane.margin>
         </TextField>
-        <TextField id="textDataNascimento" fx:id="textDistrito" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <Label text="Distrito:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <Label text="Quantidade de Familias:" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="2" />
-        <Label text="Observaçoes:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField id="textTelefone" fx:id="textObservacao" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <Label text="Distrito" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="2" />
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="339.0" minWidth="10.0" prefWidth="143.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="429.0" minWidth="10.0" prefWidth="429.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="339.0" minWidth="10.0" prefWidth="215.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="429.0" minWidth="10.0" prefWidth="357.0" />
       </columnConstraints>
       <rowConstraints>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -44,9 +44,9 @@
     </GridPane>
     <GridPane layoutX="21.0" layoutY="364.0" prefHeight="22.0" prefWidth="572.0">
       <children>
-        <Button fx:id="btCancelar" mnemonicParsing="false" onAction="#onBtCancelar" text="Cancelar" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Button fx:id="btSalvar" mnemonicParsing="false" onAction="#onBtSalvar" text="Salvar" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <Button fx:id="btSair" mnemonicParsing="false" onAction="#onBtSair" text="Sair" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <Button id="btCancelar" fx:id="btCancel" mnemonicParsing="false" text="Cancelar" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Button id="btSalvar" fx:id="btSave" mnemonicParsing="false" onAction="#onBtSaveAction" text="Salvar" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Button id="btSair" mnemonicParsing="false" text="Sair" GridPane.columnIndex="2" GridPane.rowIndex="0" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="95.0" />
@@ -57,5 +57,6 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
+    <Label id="txtLabel" fx:id="labelErrorName" layoutX="266.0" layoutY="259.0" text="" />
   </children>
 </AnchorPane>
