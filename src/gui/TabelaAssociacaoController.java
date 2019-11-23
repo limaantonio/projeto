@@ -32,33 +32,42 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Associacao;
+
 import model.services.AssociacaoService;
 
-public class TabelaClientesController implements Initializable, DataChangeListener {
+public class TabelaAssociacaoController implements Initializable, DataChangeListener {
 
-	private AssociacaoService service;
-
+	private AssociacaoService service = new AssociacaoService();
+	
+	private ObservableList<Associacao> obsList;
 	
 	@FXML
 	private TableView<Associacao> tableViewAssociacaos;
 
 	@FXML
-	
 	private TableColumn<Associacao, Integer> tableColumnId;
 
 	@FXML
 	private TableColumn<Associacao, String> tableColumnName;
-
 	
-	private ObservableList<Associacao> obsList;
-
+	@FXML
+	private TableColumn<Associacao, String> tableColumnEndereco;
 	
+	@FXML
+	private TableColumn<Associacao, String> tableColumnDistrito;
 
+	@FXML
+	private Button btEditar;
+	
+	@FXML
+	private Button btExcluir;
+	
+	@FXML
+	private Button btSair;
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
 		initializeNodes();
-
 	}
 
 	public void setAssociacaoService(AssociacaoService service) {
@@ -69,9 +78,12 @@ public class TabelaClientesController implements Initializable, DataChangeListen
 
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-
-		//Stage stage = (Stage) Main.getMainScene().getWindow();
-		//tableViewAssociacaos.prefHeightProperty().bind(stage.heightProperty());
+		tableColumnEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
+		tableColumnDistrito.setCellValueFactory(new PropertyValueFactory<>("distrito"));
+	
+		List<Associacao> list = service.findAll();
+		obsList = FXCollections.observableArrayList(list);
+		tableViewAssociacaos.setItems(obsList);
 
 	}
 
@@ -84,18 +96,39 @@ public class TabelaClientesController implements Initializable, DataChangeListen
 		tableViewAssociacaos.setItems(obsList);
 		
 	}
-
-	
-
 	@Override
 	public void onDataChanged() {
 		updateTableView();
 
 	}
-
 	
-
 	
-
 	
+	private void removeEntity(Associacao obj) {
+		Optional<ButtonType> result = Alerts.showConfirmation("Confirmação", "Você tem certeza que quer exluir?");
+		
+		if(result.get() == ButtonType.OK) {
+			if (service == null) {
+				throw new IllegalStateException("Service was null");
+			}
+			try {
+				service.remove(obj);
+				updateTableView();
+			}catch(DbIntegrityException e) {
+				Alerts.showAlert("Erro ao exluir objeto", null, e.getMessage(), Alert.AlertType.ERROR);
+			}
+		}
+	}
+	
+	public void onBtEditar() {
+		
+	}
+	
+	public void onBtExcluir() {
+		//removeEntity(obj);
+	}
+	
+	public void onBtSair() {
+		Main.chageScreen("main");
+	}
 }

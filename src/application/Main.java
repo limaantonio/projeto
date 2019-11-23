@@ -36,8 +36,8 @@ public class Main extends Application{
 			Parent parentConsumo = FXMLLoader.load(getClass().getResource("/gui/Consumo.fxml"));
 			consumoScene = new Scene(parentConsumo);
 			
-			Parent parentTabelaClientes = FXMLLoader.load(getClass().getResource("/gui/TabelaClientes.fxml"));
-			tabelaScene = new Scene(parentTabelaClientes);
+			Parent parentTabelaAssociacoes = FXMLLoader.load(getClass().getResource("/gui/TabelaAssociacoes.fxml"));
+			tabelaScene = new Scene(parentTabelaAssociacoes);
 			
 			
 			

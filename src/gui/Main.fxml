@@ -31,8 +31,8 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Relatorios">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#onMenuItemTabelaClienteSelect" text="Clientes" fx:id="menuItemTabelaCliente" />
-            <MenuItem mnemonicParsing="false" text="Por associaçao" />
+            <MenuItem mnemonicParsing="false" text="Clientes" />
+            <MenuItem mnemonicParsing="false" onAction="#onMenuItemTabelaAssociacaoSelect" text="Por associaçao" fx:id="menuItemTabelaAssociacao" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Configuraçoes">

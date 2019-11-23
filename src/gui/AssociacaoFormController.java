@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import application.Main;
 import db.DbException;
 import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
@@ -45,17 +46,16 @@ public class AssociacaoFormController implements Initializable{
 	private TextField txtDistrito;
 	
 	@FXML
-	private TextField txtResponsavel;
-	
-	@FXML
 	private Label labelErrorName;
-	
 	
 	@FXML
 	private Button btSave;
 	
 	@FXML
 	private Button btCancel;
+	
+	@FXML
+	private Button btSair;
 	
 	public void setAssociacaoService(DataChangeListener listener) {
 		dataChangeListeners.add(listener);
@@ -86,13 +86,13 @@ public class AssociacaoFormController implements Initializable{
 			entity = getFormData();
 			service.saveOrUpdate(getFormData());
 			notifyDataChangeListener();
-			Utils.currentStage(event).close();
+			//Utils.currentStage(event).close();
 		}
 		catch(ValidationException e) {
 			setErrorMensage(e.getErros());
 		}
 		catch(DbException e) {
-			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
+			Alerts.showAlert("Erro ao salvar o objeto", null, e.getMessage(), AlertType.ERROR);
 		}
 		
 	}
@@ -114,8 +114,7 @@ public class AssociacaoFormController implements Initializable{
 		}
 		obj.setName(txtName.getText());
 		obj.setEndereco(txtEndereco.getText());
-		obj.setDistrito(txtName.getText());
-		//obj.setResponsavel(txtResponsavel.getText());
+		obj.setDistrito(txtDistrito.getText());
 		
 		if(exception.getErros().size() > 0) {
 			throw exception;
@@ -148,7 +147,7 @@ public class AssociacaoFormController implements Initializable{
 		txtName.setText(entity.getName());
 		txtEndereco.setText(entity.getEndereco());
 		txtDistrito.setText(entity.getDistrito());
-		//txtResponsavel.setText(entity.getResponsavel());
+		
 	}
 	
 	private void setErrorMensage(Map<String, String> errors) {
@@ -157,5 +156,10 @@ public class AssociacaoFormController implements Initializable{
 		if(fields.contains("name")) {
 			labelErrorName.setText(errors.get("name"));
 		}
+	}
+	
+	@FXML
+	public void onbtSair() {
+		Main.chageScreen("main");
 	}
 }

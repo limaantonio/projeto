@@ -4,19 +4,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.mysql.jdbc.Statement;
 
 import db.DB;
 import db.DbException;
-import db.DbIntegrityException;
-import model.dao.AssociacaoDao;
+import model.dao.ResponsavelDao;
 import model.entities.Associacao;
+import model.entities.Responsavel;
 
-
-
-public class ResponsavelDaoJDBC implements AssociacaoDao {
+public class ResponsavelDaoJDBC implements ResponsavelDao {
 
 	private Connection conn;
 	
@@ -25,19 +26,104 @@ public class ResponsavelDaoJDBC implements AssociacaoDao {
 	}
 	
 	@Override
-	public Associacao findById(Integer id) {
+	public void insert(Responsavel obj) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"INSERT INTO Responsavel "
+					+ "(Name, DataNascimento, Endereco, CPF, AssociacaoId) "
+					+ "VALUES "
+					+ "(?, ?, ?, ?, ?)",
+					Statement.RETURN_GENERATED_KEYS);
+			
+			st.setString(1, obj.getNome());
+			st.setDate(2, new java.sql.Date(obj.getDataNascimento().getTime()));
+			st.setString(3, obj.getEndereco());
+			st.setString(4, obj.getCpf());
+			st.setInt(5, obj.getAssociacao().getId());
+			
+			int rowsAffected = st.executeUpdate();
+			
+			if (rowsAffected > 0) {
+				ResultSet rs = st.getGeneratedKeys();
+				if (rs.next()) {
+					int id = rs.getInt(1);
+					obj.setId(id);
+				}
+				DB.closeResultSet(rs);
+			}
+			else {
+				throw new DbException("Unexpected error! No rows affected!");
+			}
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
+	}
+
+	@Override
+	public void update(Responsavel obj) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"UPDATE Responsavel "
+					+ "SET Name = ?, DataNascimento = ?, Endereco = ?, CPF = ?, AssociacaoId = ? "
+					+ "WHERE Id = ?");
+			
+			st.setString(1, obj.getNome());
+			st.setDate(2, new java.sql.Date(obj.getDataNascimento().getTime()));
+			st.setString(3, obj.getEndereco());
+			st.setString(4, obj.getCpf());
+			st.setInt(5, obj.getAssociacao().getId());
+			st.setInt(6, obj.getId());
+			
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("DELETE FROM Responsavel WHERE Id = ?");
+			
+			st.setInt(1, id);
+			
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
+	}
+
+	@Override
+	public Responsavel findById(Integer id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-				"SELECT * FROM associacao WHERE Id = ?");
+					"SELECT Responsavel.*,Associacao.Name as DepName "
+					+ "FROM Responsavel INNER JOIN Associacao "
+					+ "ON Responsavel.AssociacaoId = Associacao.Id "
+					+ "WHERE Responsavel.Id = ?");
+			
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			if (rs.next()) {
-				Associacao obj = new Associacao();
-				obj.setId(rs.getInt("Id"));
-				obj.setName(rs.getString("Name"));
-				
+				Associacao dep = instantiateAssociacao(rs);
+				Responsavel obj = instantiateResponsavel(rs, dep);
 				return obj;
 			}
 			return null;
@@ -51,21 +137,51 @@ public class ResponsavelDaoJDBC implements AssociacaoDao {
 		}
 	}
 
+	private Responsavel instantiateResponsavel(ResultSet rs, Associacao dep) throws SQLException {
+		Responsavel obj = new Responsavel();
+		obj.setId(rs.getInt("Id"));
+		obj.setNome(rs.getString("Name"));
+		obj.setDataNascimento(new java.util.Date(rs.getTimestamp("BirthDate").getTime()));
+		obj.setEndereco(rs.getString("Endereco"));
+		obj.setCpf(rs.getString("CPF"));
+		obj.setAssociacao(dep);
+		
+		return obj;
+	}
+
+	private Associacao instantiateAssociacao(ResultSet rs) throws SQLException {
+		Associacao dep = new Associacao();
+		dep.setId(rs.getInt("AssociacaoId"));
+		dep.setName(rs.getString("DepName"));
+		return dep;
+	}
+
 	@Override
-	public List<Associacao> findAll() {
+	public List<Responsavel> findAll() {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-				"SELECT * FROM department ORDER BY Name");
+					"SELECT Responsavel.*,Associacao.Name as DepName "
+					+ "FROM Responsavel INNER JOIN Associacao "
+					+ "ON Responsavel.AssociacaoId = Associacao.Id "
+					+ "ORDER BY Name");
+			
 			rs = st.executeQuery();
-
-			List<Associacao> list = new ArrayList<>();
-
+			
+			List<Responsavel> list = new ArrayList<>();
+			Map<Integer, Associacao> map = new HashMap<>();
+			
 			while (rs.next()) {
-				Associacao obj = new Associacao();
-				obj.setId(rs.getInt("Id"));
-				obj.setName(rs.getString("Name"));
+				
+				Associacao dep = map.get(rs.getInt("AssociacaoId"));
+				
+				if (dep == null) {
+					dep = instantiateAssociacao(rs);
+					map.put(rs.getInt("AssociacaoId"), dep);
+				}
+				
+				Responsavel obj = instantiateResponsavel(rs, dep);
 				list.add(obj);
 			}
 			return list;
@@ -79,81 +195,44 @@ public class ResponsavelDaoJDBC implements AssociacaoDao {
 		}
 	}
 
-	@Override
-	public void insert(Associacao obj) {
+	public List<Responsavel> findByAssociacao(Associacao Associacao) {
 		PreparedStatement st = null;
+		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-				"INSERT INTO associacao " +
-				"(Name, Endereco, Distrito) " +
-				"VALUES " +
-				"(?, ?, ?)", 
-				Statement.RETURN_GENERATED_KEYS);
-
-			st.setString(1, obj.getName());
-			st.setString(2, obj.getEndereco());
-			st.setString(3, obj.getDistrito());
-			//st.setString(4, obj.getResponsavel());
-
-			int rowsAffected = st.executeUpdate();
+					"SELECT Responsavel.*,Associacao.Name as DepName "
+					+ "FROM Responsavel INNER JOIN Associacao "
+					+ "ON Responsavel.AssociacaoId = Associacao.Id "
+					+ "WHERE AssociacaoId = ? "
+					+ "ORDER BY Name");
 			
-			if (rowsAffected > 0) {
-				ResultSet rs = st.getGeneratedKeys();
-				if (rs.next()) {
-					int id = rs.getInt(1);
-					obj.setId(id);
+			st.setInt(1, Associacao.getId());
+			
+			rs = st.executeQuery();
+			
+			List<Responsavel> list = new ArrayList<>();
+			Map<Integer, Associacao> map = new HashMap<>();
+			
+			while (rs.next()) {
+				
+				Associacao dep = map.get(rs.getInt("AssociacaoId"));
+				
+				if (dep == null) {
+					dep = instantiateAssociacao(rs);
+					map.put(rs.getInt("AssociacaoId"), dep);
 				}
+				
+				Responsavel obj = instantiateResponsavel(rs, dep);
+				list.add(obj);
 			}
-			else {
-				throw new DbException("Unexpected error! No rows affected!");
-			}
+			return list;
 		}
 		catch (SQLException e) {
 			throw new DbException(e.getMessage());
-		} 
+		}
 		finally {
 			DB.closeStatement(st);
-		}
-	}
-
-	@Override
-	public void update(Associacao obj) {
-		PreparedStatement st = null;
-		try {
-			st = conn.prepareStatement(
-				"UPDATE associacao " +
-				"SET Name = ? " +
-				"WHERE Id = ?");
-
-			st.setString(1, obj.getName());
-			st.setInt(2, obj.getId());
-
-			st.executeUpdate();
-		}
-		catch (SQLException e) {
-			throw new DbException(e.getMessage());
-		} 
-		finally {
-			DB.closeStatement(st);
-		}
-	}
-
-	@Override
-	public void deleteById(Integer id) {
-		PreparedStatement st = null;
-		try {
-			st = conn.prepareStatement(
-				"DELETE FROM associacao WHERE Id = ?");
-
-			st.setInt(1, id);
-
-			st.executeUpdate();
-		}
-		catch (SQLException e) {
-			throw new DbIntegrityException(e.getMessage());
-		} 
-		finally {
-			DB.closeStatement(st);
+			DB.closeResultSet(rs);
 		}
 	}
 }

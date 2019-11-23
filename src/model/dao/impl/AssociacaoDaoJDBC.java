@@ -57,7 +57,7 @@ public class AssociacaoDaoJDBC implements AssociacaoDao {
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-				"SELECT * FROM department ORDER BY Name");
+				"SELECT * FROM associacao ORDER BY Name");
 			rs = st.executeQuery();
 
 			List<Associacao> list = new ArrayList<>();
@@ -66,6 +66,8 @@ public class AssociacaoDaoJDBC implements AssociacaoDao {
 				Associacao obj = new Associacao();
 				obj.setId(rs.getInt("Id"));
 				obj.setName(rs.getString("Name"));
+				obj.setEndereco(rs.getString("Endereco"));
+				obj.setDistrito(rs.getString("Distrito"));
 				list.add(obj);
 			}
 			return list;
@@ -93,7 +95,7 @@ public class AssociacaoDaoJDBC implements AssociacaoDao {
 			st.setString(1, obj.getName());
 			st.setString(2, obj.getEndereco());
 			st.setString(3, obj.getDistrito());
-			//st.setString(4, obj.getResponsavel());
+			
 
 			int rowsAffected = st.executeUpdate();
 			

@@ -3,6 +3,7 @@ package model.dao;
 import db.DB;
 import model.dao.impl.AssociacaoDaoJDBC;
 import model.dao.impl.ClienteDaoJDBC;
+import model.dao.impl.ResponsavelDaoJDBC;
 
 public class DaoFactory {
 
@@ -12,5 +13,9 @@ public class DaoFactory {
 	
 	public static AssociacaoDao createAssocicaoDao() {
 		return new AssociacaoDaoJDBC(DB.getConnection());
+	}
+	
+	public static ResponsavelDao createResponsavelDao() {
+		return new ResponsavelDaoJDBC(DB.getConnection());
 	}
 }

@@ -10,18 +10,17 @@ public class Associacao implements Serializable {
 	private String name;
 	private String endereco;
 	private String distrito;
-	private String responsavel;
 	
 	public Associacao() {
 	}
 
-	public Associacao(Integer id, String name, String endereco, String distrito, String responsavel) {
+	public Associacao(Integer id, String name, String endereco, String distrito) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.endereco = endereco;
 		this.distrito = distrito;
-		this.responsavel = responsavel;
+		
 	}
 
 	public Integer getId() {
@@ -56,19 +55,14 @@ public class Associacao implements Serializable {
 		this.distrito = distrito;
 	}
 
-	public String getResponsavel() {
-		return responsavel;
-	}
-
-	public void setResponsavel(String responsavel) {
-		this.responsavel = responsavel;
-	}
-
 	@Override
 	public String toString() {
-		return "Associacao [id=" + id + ", name=" + name + ", endereco=" + endereco + ", distrito=" + distrito
-				+ ", responsavel=" + responsavel + "]";
+		return "Associacao [id=" + id + ", name=" + name + ", endereco=" + endereco + ", distrito=" + distrito + "]";
 	}
+
+	
+
+	
 	
 	
 	

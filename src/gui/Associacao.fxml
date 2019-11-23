@@ -20,14 +20,16 @@
         <TextField id="btCancelar" fx:id="txtName" prefWidth="200.0" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="1" />
         <TextField id="textDataNascimento" fx:id="txtEndereco" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3" />
         <Label text="Endereço:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <Label text="Responsavel:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField id="textTelefone" fx:id="txtResponsavel" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
         <TextField id="textDataNascimento" fx:id="txtDistrito" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
           <GridPane.margin>
             <Insets left="10.0" fx:id="x1" />
           </GridPane.margin>
         </TextField>
-        <Label text="Distrito" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="2" />
+        <Label text="Distrito" GridPane.columnIndex="1" GridPane.rowIndex="2">
+          <GridPane.margin>
+            <Insets left="10.0" fx:id="x1" />
+          </GridPane.margin>
+        </Label>
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="339.0" minWidth="10.0" prefWidth="215.0" />
@@ -46,7 +48,7 @@
       <children>
         <Button id="btCancelar" fx:id="btCancel" mnemonicParsing="false" text="Cancelar" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Button id="btSalvar" fx:id="btSave" mnemonicParsing="false" onAction="#onBtSaveAction" text="Salvar" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <Button id="btSair" mnemonicParsing="false" text="Sair" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <Button fx:id="btSair" mnemonicParsing="false" onAction="#onbtSair" text="Sair" GridPane.columnIndex="2" GridPane.rowIndex="0" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="95.0" />

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -10,23 +11,38 @@
   <children>
     <GridPane layoutY="36.0" prefHeight="164.0" prefWidth="572.0" AnchorPane.rightAnchor="14.0">
       <children>
-        <TextField id="textNumCliente" fx:id="textNomeResponsavel" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Label text="Data de Nascimento:" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <TextField id="textNumCliente" fx:id="txtId" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label text="Id:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="Nome:" GridPane.columnIndex="1" GridPane.rowIndex="0">
           <GridPane.margin>
             <Insets left="10.0" fx:id="x1" />
           </GridPane.margin>
         </Label>
-        <TextField id="btCancelar" fx:id="textDataNascimento" prefWidth="200.0" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="1" />
-        <TextField fx:id="textCPF" prefWidth="291.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <TextField id="btCancelar" fx:id="txtName" prefWidth="200.0" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="1" />
+        <TextField id="textCPF" fx:id="txtCPF" prefWidth="291.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
           <GridPane.margin>
             <Insets left="10.0" right="5.0" />
           </GridPane.margin>
         </TextField>
-        <TextField id="textDataNascimento" fx:id="textEndereco" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <Label text="Endereço" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField id="textDataNascimento" fx:id="txtDataNascimento" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label text="Data de Nascimento" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <Label text="CPF:" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="2" />
-        <Label prefWidth="86.99990844726562" text="Associacao" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <Label prefWidth="86.99990000000253" text="Endereço" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField id="textDataNascimento" fx:id="txtEndereco" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <Label prefWidth="86.99990000000253" text="Associacao:" GridPane.columnIndex="1" GridPane.rowIndex="4">
+          <GridPane.margin>
+            <Insets left="10.0" fx:id="x1" />
+          </GridPane.margin>
+        </Label>
+        <ComboBox fx:id="comboBoxAssociacao" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="5">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="339.0" minWidth="10.0" prefWidth="271.0" />
@@ -43,8 +59,8 @@
     </GridPane>
     <GridPane layoutX="21.0" layoutY="364.0" prefHeight="22.0" prefWidth="572.0">
       <children>
-        <Button fx:id="btCancelar" mnemonicParsing="false" onAction="#onBtCancelar" text="Cancelar" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Button fx:id="btSalvar" mnemonicParsing="false" onAction="#onBtSalvar" text="Salvar" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Button id="btCancelar" fx:id="btCancel" mnemonicParsing="false" onAction="#onBtCanelAction" text="Cancelar" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Button id="btSalvar" fx:id="btSave" mnemonicParsing="false" onAction="#onBtSaveAction" text="Salvar" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <Button fx:id="btSair" mnemonicParsing="false" onAction="#onBtSair" text="Sair" GridPane.columnIndex="2" GridPane.rowIndex="0" />
       </children>
       <columnConstraints>
