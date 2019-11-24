@@ -6,28 +6,33 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="gui.TabelaAssociacaoController">
+<AnchorPane prefHeight="400.0" prefWidth="673.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="gui.TabelaAssociacaoController">
   <!-- TODO Add Nodes -->
   <children>
-    <TableView fx:id="tableViewAssociacaos" layoutX="14.0" layoutY="14.0" prefHeight="324.0" prefWidth="572.0">
+    <TableView fx:id="tableViewAssociacaos" layoutX="15.0" layoutY="14.0" prefHeight="324.0" prefWidth="644.0">
       <columns>
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="76.0" text="Numero" fx:id="tableColumnId" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="208.0" text="Cliente" fx:id="tableColumnName" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="117.0" text="Endereço" fx:id="tableColumnEndereco" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="170.0" text="Distrito" fx:id="tableColumnDistrito" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="254.0" text="Distrito" fx:id="tableColumnDistrito" />
       </columns>
     </TableView>
-    <GridPane layoutX="14.0" layoutY="355.0" prefHeight="20.0" prefWidth="572.0">
+    <GridPane layoutX="14.0" layoutY="354.0" prefHeight="21.0" prefWidth="572.0">
       <children>
         <Button id="btnAdicionar" fx:id="btEditar" mnemonicParsing="false" onAction="#onBtEditar" text="Editar" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Button fx:id="btSair" mnemonicParsing="false" onAction="#onBtSair" text="Sair" GridPane.columnIndex="1" GridPane.rowIndex="0">
-          <GridPane.margin>
-            <Insets left="237.0" />
-          </GridPane.margin>
-        </Button>
-        <Button fx:id="btExcluir" mnemonicParsing="false" onAction="#onBtExcluir" text="Excluir" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <Button fx:id="btExcluir" mnemonicParsing="false" onAction="#onExcluir" text="Excluir" GridPane.columnIndex="0" GridPane.rowIndex="0">
           <GridPane.margin>
             <Insets left="80.0" />
+          </GridPane.margin>
+        </Button>
+        <Button fx:id="btIncluir" mnemonicParsing="false" onAction="#onBtIncluir" text="Incluir" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <GridPane.margin>
+            <Insets left="165.0" />
+          </GridPane.margin>
+        </Button>
+        <Button fx:id="btAtualizar" mnemonicParsing="false" onAction="#onBtAtualizar" prefWidth="88.0" text="Atualizar" GridPane.columnIndex="1" GridPane.rowIndex="0">
+          <GridPane.margin>
+            <Insets left="200.0" />
           </GridPane.margin>
         </Button>
       </children>
@@ -39,5 +44,6 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
+    <Button fx:id="btSair" layoutX="612.0" layoutY="354.0" mnemonicParsing="false" onAction="#onBtSair" text="Sair" />
   </children>
 </AnchorPane>

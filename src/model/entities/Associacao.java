@@ -1,6 +1,9 @@
 package model.entities;
 
+import java.awt.Checkbox;
 import java.io.Serializable;
+
+import javafx.scene.control.CheckBox;
 
 public class Associacao implements Serializable {
 
@@ -11,16 +14,27 @@ public class Associacao implements Serializable {
 	private String endereco;
 	private String distrito;
 	
+	private Checkbox selected;
+	
 	public Associacao() {
 	}
 
 	public Associacao(Integer id, String name, String endereco, String distrito) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.endereco = endereco;
 		this.distrito = distrito;
+		this.selected = new Checkbox();
 		
+	}
+	
+
+	public Checkbox getSelected() {
+		return selected;
+	}
+
+	public void setSelected(Checkbox selected) {
+		this.selected = selected;
 	}
 
 	public Integer getId() {

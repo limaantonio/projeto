@@ -19,7 +19,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import model.Exception.ValidationException;
 import model.entities.Associacao;
@@ -86,7 +85,11 @@ public class AssociacaoFormController implements Initializable{
 			entity = getFormData();
 			service.saveOrUpdate(getFormData());
 			notifyDataChangeListener();
-			//Utils.currentStage(event).close();
+			Alerts.showAlert("Salvar", null, "Associacao Salva com sucesso", AlertType.INFORMATION);
+			
+			clear();
+			
+		
 		}
 		catch(ValidationException e) {
 			setErrorMensage(e.getErros());
@@ -162,4 +165,13 @@ public class AssociacaoFormController implements Initializable{
 	public void onbtSair() {
 		Main.chageScreen("main");
 	}
+	
+	public void clear() {
+		txtId.setText("");
+		txtName.setText("");
+		txtEndereco.setText("");
+		txtDistrito.setText("");
+	}
+	
+	
 }
