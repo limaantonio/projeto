@@ -30,7 +30,7 @@ public class ResponsavelDaoJDBC implements ResponsavelDao {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
-					"INSERT INTO Responsavel "
+					"INSERT INTO responsavel "
 					+ "(Name, DataNascimento, Endereco, CPF, AssociacaoId) "
 					+ "VALUES "
 					+ "(?, ?, ?, ?, ?)",
@@ -69,7 +69,7 @@ public class ResponsavelDaoJDBC implements ResponsavelDao {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
-					"UPDATE Responsavel "
+					"UPDATE responsavel "
 					+ "SET Name = ?, DataNascimento = ?, Endereco = ?, CPF = ?, AssociacaoId = ? "
 					+ "WHERE Id = ?");
 			
@@ -94,7 +94,7 @@ public class ResponsavelDaoJDBC implements ResponsavelDao {
 	public void deleteById(Integer id) {
 		PreparedStatement st = null;
 		try {
-			st = conn.prepareStatement("DELETE FROM Responsavel WHERE Id = ?");
+			st = conn.prepareStatement("DELETE FROM responsavel WHERE Id = ?");
 			
 			st.setInt(1, id);
 			
@@ -141,7 +141,7 @@ public class ResponsavelDaoJDBC implements ResponsavelDao {
 		Responsavel obj = new Responsavel();
 		obj.setId(rs.getInt("Id"));
 		obj.setNome(rs.getString("Name"));
-		obj.setDataNascimento(new java.util.Date(rs.getTimestamp("BirthDate").getTime()));
+	//	obj.setDataNascimento(new java.util.Date(rs.getTimestamp("BirthDate").getTime()));
 		obj.setEndereco(rs.getString("Endereco"));
 		obj.setCpf(rs.getString("CPF"));
 		obj.setAssociacao(dep);
@@ -162,26 +162,18 @@ public class ResponsavelDaoJDBC implements ResponsavelDao {
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-					"SELECT Responsavel.*,Associacao.Name as DepName "
-					+ "FROM Responsavel INNER JOIN Associacao "
-					+ "ON Responsavel.AssociacaoId = Associacao.Id "
-					+ "ORDER BY Name");
-			
+				"SELECT * FROM responsavel ORDER BY Name");
 			rs = st.executeQuery();
-			
+
 			List<Responsavel> list = new ArrayList<>();
-			Map<Integer, Associacao> map = new HashMap<>();
-			
+
 			while (rs.next()) {
-				
-				Associacao dep = map.get(rs.getInt("AssociacaoId"));
-				
-				if (dep == null) {
-					dep = instantiateAssociacao(rs);
-					map.put(rs.getInt("AssociacaoId"), dep);
-				}
-				
-				Responsavel obj = instantiateResponsavel(rs, dep);
+				Responsavel obj = new Responsavel();
+				obj.setId(rs.getInt("Id"));
+				obj.setNome(rs.getString("Name"));
+				obj.setDataNascimento(rs.getDate("DataNascimento"));
+				obj.setEndereco(rs.getString("Endereco"));
+				obj.setCpf(rs.getString("CPF"));
 				list.add(obj);
 			}
 			return list;
@@ -195,14 +187,15 @@ public class ResponsavelDaoJDBC implements ResponsavelDao {
 		}
 	}
 
+
 	public List<Responsavel> findByAssociacao(Associacao Associacao) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-					"SELECT Responsavel.*,Associacao.Name as DepName "
+					"SELECT responsavel.*,associacao.Name as DepName "
 					+ "FROM Responsavel INNER JOIN Associacao "
-					+ "ON Responsavel.AssociacaoId = Associacao.Id "
+					+ "ON responsavel.AssociacaoId = Associacao.Id "
 					+ "WHERE AssociacaoId = ? "
 					+ "ORDER BY Name");
 			

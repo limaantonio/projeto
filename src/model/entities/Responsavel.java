@@ -170,13 +170,17 @@ public class Responsavel implements Serializable{
 
 
 
-
-
 	@Override
 	public String toString() {
 		return "Responsavel [id=" + id + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", endereco="
 				+ endereco + ", cpf=" + cpf + ", associacao=" + associacao + "]";
 	}
+
+
+
+	
+
+	
 
 
 	

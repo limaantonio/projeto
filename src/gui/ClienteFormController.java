@@ -9,8 +9,6 @@ import model.entities.Cliente;
 
 public class ClienteFormController {
 	
-	//Controllers do Componentes do Formulário
-	
 	@FXML
 	private TextField textNumCliente;
 	
@@ -26,8 +24,7 @@ public class ClienteFormController {
 	@FXML
 	private TextField textTelefone;
 	
-	@FXML
-	private TextField textAssociacao;
+	
 	
 	@FXML
 	private Button btCancelar;
@@ -37,30 +34,10 @@ public class ClienteFormController {
 	
 	@FXML
 	private Button btSair;
-	
-	
-	
-	//Açoes do formulário
-	
-	
 
 	@FXML
 	public void onBtSalvar() {
 		
-		
-	
-//		Cliente cliente = new Cliente(this.textNumCliente.getText(),
-//									  this.textNomeCliente.getText(), 
-//									  this.textDataNascimento.getText(), 
-//									  this.textCPF.getText(),
-//									  this.textTelefone.getText()
-//									  );
-//		
-		
-	
-		
-		System.out.println("Cliente Salvo");
-		//System.out.println(cliente);
 	}
 	
 	@FXML

@@ -1,9 +1,11 @@
 package gui;
 
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -24,6 +26,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.util.Callback;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -62,7 +65,7 @@ public class ResponsavelFormController implements Initializable{
 	private TextField txtEndereco;
 	
 	@FXML
-	private TextField txtDataNascimento;
+	private DatePicker txtDataNascimento;
 	
 	@FXML
 	private TextField txtCPF;
@@ -116,7 +119,11 @@ public class ResponsavelFormController implements Initializable{
 			entity = getFormData();
 			service.saveOrUpdate(getFormData());
 			notifyDataChangeListener();
-			Utils.currentStage(event).close();
+			
+			Alerts.showAlert("Salvar", null, "Responsável salvo com sucesso!", AlertType.INFORMATION);
+			
+			clear();
+			
 		}
 		catch(ValidationException e) {
 			setErrorMensage(e.getErros());
@@ -143,8 +150,10 @@ public class ResponsavelFormController implements Initializable{
 			exception.addErrors("name", "Fiel can't be empty");
 		}
 		obj.setNome(txtName.getText());
-		//obj.setDataNascimento(txtEndereco.getText());
+		Instant instant = Instant.from(txtDataNascimento.getValue().atStartOfDay(ZoneId.systemDefault()));
+		obj.setDataNascimento(Date.from(instant));
 		obj.setEndereco(txtEndereco.getText());
+		obj.setCpf(txtCPF.getText());
 		obj.setAssociacao(comboBoxAssociacao.getValue());
 		
 	
@@ -181,6 +190,7 @@ public class ResponsavelFormController implements Initializable{
 		txtName.setText(entity.getNome());
 		txtEndereco.setText(entity.getEndereco());
 		//txtDataNascimento(LocalDate.ofInstant(entity.getDataNascimento().toInstant(), ZoneId.systemDefault()));
+		txtCPF.setText(entity.getCpf());
 		
 			
 		if(entity.getAssociacao() == null) {
@@ -229,5 +239,13 @@ public class ResponsavelFormController implements Initializable{
 		};
 		comboBoxAssociacao.setCellFactory(factory);
 		comboBoxAssociacao.setButtonCell(factory.call(null));
+	}
+	public void clear() {
+		txtId.setText("");
+		txtName.setText("");
+		txtEndereco.setText("");
+		//txtDataNascimento(Date.from());
+		txtCPF.setText("");
+		
 	}
 }

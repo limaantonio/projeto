@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="gui.MainViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainViewController">
   <children>
     <MenuBar layoutX="0.0" layoutY="1.0" prefHeight="27.0" prefWidth="600.0">
       <menus>
-        <Menu mnemonicParsing="false" onAction="#onMenuHomeSelect" onMenuValidation="#onMenuHomeSelect" text="Home" fx:id="menuHome" />
+        <Menu fx:id="menuHome" mnemonicParsing="false" onAction="#onMenuHomeSelect" onMenuValidation="#onMenuHomeSelect" text="Home" />
         <Menu mnemonicParsing="false" text="Consumo">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#onMenuItemConsumoSelect" text="Novo" fx:id="menuConsumo" />
+            <MenuItem fx:id="menuConsumo" mnemonicParsing="false" onAction="#onMenuItemConsumoSelect" text="Novo" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Cadastros">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#onMenuItemClienteSelect" text="Cliente" fx:id="menuItemCliente" />
-            <MenuItem mnemonicParsing="false" onAction="#onMenuItemAssociacaoSelect" text="Associaçao" fx:id="menuItemAssociacao" />
-            <MenuItem mnemonicParsing="false" onAction="#onMenuItemResponsavelSelect" text="Responsavel" fx:id="menuItemResponsavel" />
+            <MenuItem fx:id="menuItemCliente" mnemonicParsing="false" onAction="#onMenuItemClienteSelect" text="Cliente" />
+            <MenuItem fx:id="menuItemAssociacao" mnemonicParsing="false" onAction="#onMenuItemAssociacaoSelect" text="Associaçao" />
+            <MenuItem fx:id="menuItemResponsavel" mnemonicParsing="false" onAction="#onMenuItemResponsavelSelect" text="Responsavel" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Ordens">
@@ -31,8 +30,8 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Relatorios">
           <items>
-            <MenuItem mnemonicParsing="false" text="Clientes" />
-            <MenuItem mnemonicParsing="false" onAction="#onMenuItemTabelaAssociacaoSelect" text="Por associaçao" fx:id="menuItemTabelaAssociacao" />
+            <MenuItem fx:id="menuItemTabelaResponsaveis" mnemonicParsing="false" onAction="#onMenuItemTabelaResponsaveisSelect" text="Por Responsaveis" />
+            <MenuItem fx:id="menuItemTabelaAssociacao" mnemonicParsing="false" onAction="#onMenuItemTabelaAssociacaoSelect" text="Por associaçao" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Configuraçoes">
