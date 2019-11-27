@@ -17,6 +17,7 @@ public class Main extends Application{
 	private static Scene consumoScene;
 	private static Scene tabelaScene;
 	private static Scene tabelaResponsavelScene;
+	private static Scene tabelaClienteScene;
 	
 	@Override
 	public void start(Stage primarystage) {
@@ -42,6 +43,9 @@ public class Main extends Application{
 			
 			Parent parentTabelaResponsaveis = FXMLLoader.load(getClass().getResource("/gui/TabelaResponsaveis.fxml"));
 			tabelaResponsavelScene = new Scene(parentTabelaResponsaveis);
+			
+			Parent parentTabelaCliente = FXMLLoader.load(getClass().getResource("/gui/TabelaClientes.fxml"));
+			tabelaClienteScene = new Scene(parentTabelaCliente);
 			
 			
 			
@@ -79,6 +83,9 @@ public class Main extends Application{
 			
 		case "tabelaResponsaveis":
 			stage.setScene(tabelaResponsavelScene);
+			break;
+		case "tabelaClientes":
+			stage.setScene(tabelaClienteScene);
 			break;
 		}
 		

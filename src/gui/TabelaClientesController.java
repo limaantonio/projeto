@@ -21,34 +21,35 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.entities.Cliente;
-import model.services.ClienteService;
+import model.entities.Responsavel;
+import model.services.ResponsavelService;
 
-public class TabelaResponsavelController implements Initializable, DataChangeListener {
+public class TabelaClientesController implements Initializable, DataChangeListener {
 
-	private ClienteService service = new ClienteService();
+	private ResponsavelService service = new ResponsavelService();
 	
-	private ObservableList<Cliente> obsList;
-	
-	@FXML
-	private TableView<Cliente> tableViewResponsaveis;
+	private ObservableList<Responsavel> obsList;
 	
 	@FXML
-	private TableColumn<Cliente, Cliente> tableColumnREMOVE = new TableColumn<Cliente, Cliente>();
-
+	private TableView<Responsavel> tableViewResponsaveis;
+	
 	@FXML
-	private TableColumn<Cliente, Integer> tableColumnId;
+	private TableColumn<Responsavel, Responsavel> tableColumnREMOVE = new TableColumn<Responsavel, Responsavel>();
 
 	@FXML
-	private TableColumn<Cliente, String> tableColumnName;
+	private TableColumn<Responsavel, Integer> tableColumnId;
+
+	@FXML
+	private TableColumn<Responsavel, String> tableColumnName;
 	
 	@FXML
-	private TableColumn<Cliente, Date> tableColumnDateNascimento;
-	
-	
+	private TableColumn<Responsavel, Date> tableColumnDateNascimento;
 	
 	@FXML
-	private TableColumn<Cliente, String> tableColumnCpf;
+	private TableColumn<Responsavel, String> tableColumnEndereco;
+	
+	@FXML
+	private TableColumn<Responsavel, String> tableColumnCpf;
 
 	@FXML
 	private Button btIncluir;
@@ -73,7 +74,7 @@ public class TabelaResponsavelController implements Initializable, DataChangeLis
 		
 	}
 
-	public void setClienteService(ClienteService service) {
+	public void setResponsavelService(ResponsavelService service) {
 		this.service = service;
 	}
 
@@ -85,7 +86,7 @@ public class TabelaResponsavelController implements Initializable, DataChangeLis
 		Utils.formatTableColumnDate(tableColumnDateNascimento, "dd/MM/yyyy");
 		tableColumnCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 	
-		List<Cliente> list = service.findAll();
+		List<Responsavel> list = service.findAll();
 		obsList = FXCollections.observableArrayList(list);
 		tableViewResponsaveis.setItems(obsList);
 		
@@ -96,7 +97,7 @@ public class TabelaResponsavelController implements Initializable, DataChangeLis
 		if (service == null) {
 			throw new IllegalStateException("service was null");
 		}
-		List<Cliente> list = service.findAll();
+		List<Responsavel> list = service.findAll();
 		obsList = FXCollections.observableArrayList(list);
 		tableViewResponsaveis.setItems(obsList);
 		
@@ -109,7 +110,7 @@ public class TabelaResponsavelController implements Initializable, DataChangeLis
 	
 	
 	
-	private void removeEntity(Cliente obj) {
+	private void removeEntity(Responsavel obj) {
 		Optional<ButtonType> result = Alerts.showConfirmation("Confirmação", "Você tem certeza que quer exluir?");
 		
 		if(result.get() == ButtonType.OK) {
@@ -131,14 +132,14 @@ public class TabelaResponsavelController implements Initializable, DataChangeLis
 	
 	public void onExcluir() {
 		btExcluir.setOnAction(e -> {
-			Cliente selectedItem = tableViewResponsaveis.getSelectionModel().getSelectedItem();
+			Responsavel selectedItem = tableViewResponsaveis.getSelectionModel().getSelectedItem();
 			tableViewResponsaveis.getItems().remove(selectedItem);
 			removeEntity(selectedItem);
 		});
 	}
 	
 	public void onBtIncluir() {
-		Main.chageScreen("cliente");
+		Main.chageScreen("responsavel");
 	}
 	
 	public void onBtSair() {

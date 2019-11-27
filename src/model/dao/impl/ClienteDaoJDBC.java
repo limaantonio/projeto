@@ -1,6 +1,5 @@
 package model.dao.impl;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.sql.Statement;
+
+import com.mysql.jdbc.Statement;
 
 import db.DB;
 import db.DbException;
@@ -17,8 +17,7 @@ import model.dao.ClienteDao;
 import model.entities.Associacao;
 import model.entities.Cliente;
 
-
-public  class ClienteDaoJDBC implements ClienteDao {
+public class ClienteDaoJDBC implements ClienteDao {
 
 	private Connection conn;
 	
@@ -32,13 +31,15 @@ public  class ClienteDaoJDBC implements ClienteDao {
 		try {
 			st = conn.prepareStatement(
 					"INSERT INTO cliente "
-					+ "(Name, AssociacaoId) "
+					+ "(Name, DataNascimento, CPF, AssociacaoId) "
 					+ "VALUES "
-					+ "(?, ?, ?, ?, ?)",
+					+ "(?, ?, ?, ?)",
 					Statement.RETURN_GENERATED_KEYS);
 			
-			st.setString(1, obj.getNomeCliente());
-			//st.setInt(2, obj.getAssociacao().getId());
+			st.setString(1, obj.getNome());
+			st.setDate(2, new java.sql.Date(obj.getDataNascimento().getTime()));
+			st.setString(3, obj.getCpf());
+			st.setInt(4, obj.getAssociacao().getId());
 			
 			int rowsAffected = st.executeUpdate();
 			
@@ -62,207 +63,166 @@ public  class ClienteDaoJDBC implements ClienteDao {
 		}
 	}
 
-//	@Override
-//	public void update(Cliente obj) {
-//		PreparedStatement st = null;
-//		try {
-//			st = conn.prepareStatement(
-//					"UPDATE seller "
-//					+ "SET Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ? "
-//					+ "WHERE Id = ?");
-//			
-//			st.setString(1, obj.getName());
-//			st.setString(2, obj.getEmail());
-//			st.setDate(3, new java.sql.Date(obj.getBirthDate().getTime()));
-//			st.setDouble(4, obj.getBaseSalary());
-//			st.setInt(5, obj.getDepartment().getId());
-//			st.setInt(6, obj.getId());
-//			
-//			st.executeUpdate();
-//		}
-//		catch (SQLException e) {
-//			throw new DbException(e.getMessage());
-//		}
-//		finally {
-//			DB.closeStatement(st);
-//		}
-//	}
-//
-//	@Override
-//	public void deleteById(Integer id) {
-//		PreparedStatement st = null;
-//		try {
-//			st = conn.prepareStatement("DELETE FROM seller WHERE Id = ?");
-//			
-//			st.setInt(1, id);
-//			
-//			st.executeUpdate();
-//		}
-//		catch (SQLException e) {
-//			throw new DbException(e.getMessage());
-//		}
-//		finally {
-//			DB.closeStatement(st);
-//		}
-//	}
-//
-//	@Override
-//	public Cliente findById(Integer id) {
-//		PreparedStatement st = null;
-//		ResultSet rs = null;
-//		try {
-//			st = conn.prepareStatement(
-//					"SELECT seller.*,department.Name as DepName "
-//					+ "FROM seller INNER JOIN department "
-//					+ "ON seller.DepartmentId = department.Id "
-//					+ "WHERE seller.Id = ?");
-//			
-//			st.setInt(1, id);
-//			rs = st.executeQuery();
-//			if (rs.next()) {
-//				Department dep = instantiateDepartment(rs);
-//				Seller obj = instantiateSeller(rs, dep);
-//				return obj;
-//			}
-//			return null;
-//		}
-//		catch (SQLException e) {
-//			throw new DbException(e.getMessage());
-//		}
-//		finally {
-//			DB.closeStatement(st);
-//			DB.closeResultSet(rs);
-//		}
-//	}
-//
-//	private Cliente instantiateSeller(ResultSet rs, Department dep) throws SQLException {
-//		Cliente obj = new Seller();
-//		obj.setId(rs.getInt("Id"));
-//		obj.setName(rs.getString("Name"));
-//		obj.setEmail(rs.getString("Email"));
-//		obj.setBaseSalary(rs.getDouble("baseSalary"));
-//		obj.setBirthDate(new java.util.Date(rs.getTimestamp("BirthDate").getTime()));
-//		obj.setDepartment(dep);
-//		return obj;
-//	}
-//
-//	private Department instantiateDepartment(ResultSet rs) throws SQLException {
-//		Department dep = new Department();
-//		dep.setId(rs.getInt("DepartmentId"));
-//		dep.setName(rs.getString("DepName"));
-//		return dep;
-//	}
-//
-//	@Override
-//	public List<Cliente> findAll() {
-//		PreparedStatement st = null;
-//		ResultSet rs = null;
-//		try {
-//			st = conn.prepareStatement(
-//					"SELECT seller.*,department.Name as DepName "
-//					+ "FROM seller INNER JOIN department "
-//					+ "ON seller.DepartmentId = department.Id "
-//					+ "ORDER BY Name");
-//			
-//			rs = st.executeQuery();
-//			
-//			List<Cliente> list = new ArrayList<>();
-//			Map<Integer, Department> map = new HashMap<>();
-//			
-//			while (rs.next()) {
-//				
-//				Department dep = map.get(rs.getInt("DepartmentId"));
-//				
-//				if (dep == null) {
-//					dep = instantiateDepartment(rs);
-//					map.put(rs.getInt("DepartmentId"), dep);
-//				}
-//				
-//				Seller obj = instantiateSeller(rs, dep);
-//				list.add(obj);
-//			}
-//			return list;
-//		}
-//		catch (SQLException e) {
-//			throw new DbException(e.getMessage());
-//		}
-//		finally {
-//			DB.closeStatement(st);
-//			DB.closeResultSet(rs);
-//		}
-//	}
-//
-//	@Override
-//	public List<Cliente> findByDepartment(Department department) {
-//		PreparedStatement st = null;
-//		ResultSet rs = null;
-//		try {
-//			st = conn.prepareStatement(
-//					"SELECT seller.*,department.Name as DepName "
-//					+ "FROM seller INNER JOIN department "
-//					+ "ON seller.DepartmentId = department.Id "
-//					+ "WHERE DepartmentId = ? "
-//					+ "ORDER BY Name");
-//			
-//			st.setInt(1, department.getId());
-//			
-//			rs = st.executeQuery();
-//			
-//			List<Cliente> list = new ArrayList<>();
-//			Map<Integer, Department> map = new HashMap<>();
-//			
-//			while (rs.next()) {
-//				
-//				Department dep = map.get(rs.getInt("DepartmentId"));
-//				
-//				if (dep == null) {
-//					dep = instantiateDepartment(rs);
-//					map.put(rs.getInt("DepartmentId"), dep);
-//				}
-//				
-//				Cliente obj = instantiateSeller(rs, dep);
-//				list.add(obj);
-//			}
-//			return list;
-//		}
-//		catch (SQLException e) {
-//			throw new DbException(e.getMessage());
-//		}
-//		finally {
-//			DB.closeStatement(st);
-//			DB.closeResultSet(rs);
-//		}
-//	}
-//
-//	
-	
-	@Override
-	public List<Cliente> findByAssociacao(Associacao associacao) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public void update(Cliente obj) {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"UPDATE cliente "
+					+ "SET Name = ?, DataNascimento = ?, Endereco = ?, CPF = ?, AssociacaoId = ? "
+					+ "WHERE Id = ?");
+			
+			st.setString(1, obj.getNome());
+			st.setDate(2, new java.sql.Date(obj.getDataNascimento().getTime()));
+			st.setString(3, obj.getCpf());
+			st.setInt(4, obj.getAssociacao().getId());
+			st.setInt(5, obj.getId());
+			
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("DELETE FROM cliente WHERE Id = ?");
+			
+			st.setInt(1, id);
+			
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
 	public Cliente findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT cliente.*,Associacao.Name as DepName "
+					+ "FROM cliente INNER JOIN Associacao "
+					+ "ON cliente.AssociacaoId = Associacao.Id "
+					+ "WHERE cliente.Id = ?");
+			
+			st.setInt(1, id);
+			rs = st.executeQuery();
+			if (rs.next()) {
+				Associacao dep = instantiateAssociacao(rs);
+				Cliente obj = instantiateCliente(rs, dep);
+				return obj;
+			}
+			return null;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+	}
+
+	private Cliente instantiateCliente(ResultSet rs, Associacao dep) throws SQLException {
+		Cliente obj = new Cliente();
+		obj.setId(rs.getInt("Id"));
+		obj.setNome(rs.getString("Name"));
+	//	obj.setDataNascimento(new java.util.Date(rs.getTimestamp("BirthDate").getTime()));
+		obj.setCpf(rs.getString("CPF"));
+		obj.setAssociacao(dep);
+		
+		return obj;
+	}
+
+	private Associacao instantiateAssociacao(ResultSet rs) throws SQLException {
+		Associacao dep = new Associacao();
+		dep.setId(rs.getInt("AssociacaoId"));
+		dep.setName(rs.getString("DepName"));
+		return dep;
 	}
 
 	@Override
 	public List<Cliente> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+				"SELECT * FROM cliente ORDER BY Name");
+			rs = st.executeQuery();
+
+			List<Cliente> list = new ArrayList<>();
+
+			while (rs.next()) {
+				Cliente obj = new Cliente();
+				obj.setId(rs.getInt("Id"));
+				obj.setNome(rs.getString("Name"));
+				obj.setDataNascimento(rs.getDate("DataNascimento"));
+				
+				obj.setCpf(rs.getString("CPF"));
+				list.add(obj);
+			}
+			return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+	}
+
+
+	public List<Cliente> findByAssociacao(Associacao Associacao) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT cliente.*,associacao.Name as DepName "
+					+ "FROM cliente INNER JOIN Associacao "
+					+ "ON cliente.AssociacaoId = Associacao.Id "
+					+ "WHERE AssociacaoId = ? "
+					+ "ORDER BY Name");
+			
+			st.setInt(1, Associacao.getId());
+			
+			rs = st.executeQuery();
+			
+			List<Cliente> list = new ArrayList<>();
+			Map<Integer, Associacao> map = new HashMap<>();
+			
+			while (rs.next()) {
+				
+				Associacao dep = map.get(rs.getInt("AssociacaoId"));
+				
+				if (dep == null) {
+					dep = instantiateAssociacao(rs);
+					map.put(rs.getInt("AssociacaoId"), dep);
+				}
+				
+				Cliente obj = instantiateCliente(rs, dep);
+				list.add(obj);
+			}
+			return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 }

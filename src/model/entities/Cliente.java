@@ -1,17 +1,60 @@
 package model.entities;
 
-public class Cliente {
+import java.io.Serializable;
+import java.util.Date;
+
+public class Cliente implements Serializable{
 	
-	private String numeroCliente;
-	private String nomeCliente;
-	private String dtNascimentoCliente;
-	private String cpfCliente;
-	private String telefoneCliente;
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
+	private String nome;
+	private Date dataNascimento;
+	private String cpf;
+	
+	private Associacao associacao;
 	
 	
+	public Cliente(){
+		
+	}
+
+
+
+	public Cliente(Integer id, String nome, Date dataNascimento, String cpf,
+			Associacao associacao) {
+		
+		this.id = id;
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		
+		this.cpf = cpf;
+		this.associacao = associacao;
+	}
+
 	
+	
+
+
+
+	public Associacao getAssociacao() {
+		return associacao;
+	}
+
+
+
+
+
+	public void setAssociacao(Associacao associacao) {
+		this.associacao = associacao;
+	}
+
+
+
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -22,76 +65,118 @@ public class Cliente {
 	}
 
 
-	
-	public Cliente() {
+	public String getNome() {
+		return nome;
+	}
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+
+
+
+	public String getCpf() {
+		return cpf;
+	}
+
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+
+
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((associacao == null) ? 0 : associacao.hashCode());
+		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
 		
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
 	}
+
+
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		if (associacao == null) {
+			if (other.associacao != null)
+				return false;
+		} else if (!associacao.equals(other.associacao))
+			return false;
+		if (cpf == null) {
+			if (other.cpf != null)
+				return false;
+		} else if (!cpf.equals(other.cpf))
+			return false;
+		if (dataNascimento == null) {
+			if (other.dataNascimento != null)
+				return false;
+		} else if (!dataNascimento.equals(other.dataNascimento))
+			return false;
 	
-	
-
-
-public Cliente(String numero, String nome) {
-		this.numeroCliente = numero;
-		this.nomeCliente = nome;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
 	}
 
-	public Cliente(String numeroCliente, String nomeCliente, String dtNascimentoCliente, String cpfCliente,
-			String telefoneCliente) {
-		
-		this.numeroCliente = numeroCliente;
-		this.nomeCliente = nomeCliente;
-		this.dtNascimentoCliente = dtNascimentoCliente;
-		this.cpfCliente = cpfCliente;
-		this.telefoneCliente = telefoneCliente;
-		
-	}
 
-	
-	public String getNumeroCliente() {
-		return numeroCliente;
-	}
-
-	public void setNumeroCliente(String numeroCliente) {
-		this.numeroCliente = numeroCliente;
-	}
-
-	public String getNomeCliente() {
-		return nomeCliente;
-	}
-
-	public void setNomeCliente(String nomeCliente) {
-		this.nomeCliente = nomeCliente;
-	}
-
-	public String getDtNascimentoCliente() {
-		return dtNascimentoCliente;
-	}
-
-	public void setDtNascimentoCliente(String dtNascimentoCliente) {
-		this.dtNascimentoCliente = dtNascimentoCliente;
-	}
-
-	public String getCpfCliente() {
-		return cpfCliente;
-	}
-
-	public void setCpfCliente(String cpfCliente) {
-		this.cpfCliente = cpfCliente;
-	}
-
-	public String getTelefoneCliente() {
-		return telefoneCliente;
-	}
-
-	public void setTelefoneCliente(String telefoneCliente) {
-		this.telefoneCliente = telefoneCliente;
-	}
 
 	@Override
 	public String toString() {
-		return "Cliente [numeroCliente=" + numeroCliente + ", nomeCliente=" + nomeCliente + ", dtNascimentoCliente="
-				+ dtNascimentoCliente + ", cpfCliente=" + cpfCliente + ", telefoneCliente=" + telefoneCliente + "]";
+		return "Cliente [id=" + id + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", cpf=" + cpf
+				+ ", associacao=" + associacao + "]";
 	}
-		
+
+
+
+	
+
+
+
+	
+
+	
+
+
+	
+
+
+	
 	
 }

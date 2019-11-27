@@ -43,6 +43,9 @@ public class MainViewController implements Initializable{
 	private MenuItem menuItemTabelaResponsaveis;
 	
 	@FXML
+	private MenuItem menuItemTabelaClientes;
+	
+	@FXML
 	public void onMenuHomeSelect() {
 		Main.chageScreen("main");
 	}
@@ -76,6 +79,12 @@ public class MainViewController implements Initializable{
 	@FXML
 	public void onMenuItemTabelaResponsaveisSelect() {
 		Main.chageScreen("tabelaResponsaveis");
+		
+	}
+	
+	@FXML
+	public void onMenuItemTabelaClientesSelect() {
+		Main.chageScreen("tabelaClientes");
 		
 	}
 	
